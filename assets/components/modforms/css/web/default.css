@@ -1,3 +1,6 @@
 .modforms-form .realperson-regen {
 	display: initial;
 }
+.modforms-form .realperson-text {
+	cursor: pointer;
+}
