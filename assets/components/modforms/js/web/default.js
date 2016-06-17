@@ -23,6 +23,7 @@ var ModFormsForm = {
 
 		}
 	},
+	salt: '123456',
 
 	validator: {
 		addMethod: function() {
@@ -31,23 +32,45 @@ var ModFormsForm = {
 				return this.optional(element) || /^\+\d\([0-9]{3}\)[0-9]{3}-[0-9]{2}\-[0-9]{2}/i.test(value);
 			});
 
+			jQuery.validator.addMethod("realperson", function(value, element) {
+				return this.optional(element) || $(element).realperson('getHash') == ModFormsForm.realperson.hash(value+ ModFormsForm.salt);
+			});
+
 			ModFormsForm.init['addMethod'] = true;
+		}
+	},
+
+	realperson: {
+		hash: function(value) {
+			var hash = 5381;
+			value = value.toUpperCase();
+			for (var i = 0; i < value.length; i++) {
+				hash = ((hash << 5) + hash) + value.charCodeAt(i);
+			}
+			return hash;
 		}
 	},
 
 	initialize: function(opts) {
 		var config = $.extend(true, {}, this.config, opts);
 
-		if (!jQuery.Validation) {
+		if (!jQuery().validate) {
 			document.writeln('<script src="' + config.assetsUrl + 'vendor/validation/dist/jquery.validate.min.js"><\/script>');
 		}
 
-		if (!jQuery.inputmask) {
+		if (!jQuery().inputmask) {
 			document.writeln('<script src="' + config.assetsUrl + 'vendor/inputmask/dist/min/jquery.inputmask.bundle.min.js"><\/script>');
 		}
 
-		if (!jQuery.ajaxSubmit) {
+		if (!jQuery().ajaxForm) {
 			document.writeln('<script src="' + config.assetsUrl + 'vendor/form/jquery.form.js"><\/script>');
+		}
+
+		if (!jQuery().realperson) {
+			jQuery.salt = ModFormsForm.salt;
+			document.writeln('<style data-compiled-css>@import url(' + config.assetsUrl + 'vendor/realperson/jquery.realperson.css); </style>');
+			document.writeln('<script src="' + config.assetsUrl + 'vendor/realperson/jquery.plugin.min.js"><\/script>');
+			document.writeln('<script src="' + config.assetsUrl + 'vendor/realperson/jquery.realperson.js"><\/script>')
 		}
 
 		if (!jQuery().UIkit) {
@@ -65,14 +88,25 @@ var ModFormsForm = {
 			$(ModFormsForm.selector.form + config.selector).each(function() {
 				var $this = $(this);
 
+				/* inputmask */
 				var inputmaskConfig = $.extend({}, config.inputmask, $this.data());
 				$.each(inputmaskConfig, function(name, options) {
 					var input = $this.find('input[name=' + name + ']');
-					if (!!input) {
+					if (input.length) {
 						input.inputmask($.extend({}, options, input.data()));
 					}
 				}, this);
 
+				/* realperson */
+				var realpersonConfig = $.extend({}, config.realperson, $this.data());
+				if (realpersonConfig.field) {
+					var input = $this.find('input[name=' + realpersonConfig.field + ']');
+					if (input.length) {
+						input.realperson(realpersonConfig.config);
+					}
+				}
+
+				/* validation */
 				var validationConfig = $.extend({}, config.validation, $this.data());
 				validationConfig.submitHandler = function() {
 					/* hide modal, show thanks */

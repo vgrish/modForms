@@ -1,5 +1,10 @@
 Changelog for ModForms.
 
-1.0.0- (23.03.2016)
+1.0.1 - (17.06.2016)
+==============
+- Fix "initialize"
+- Add "realperson"
+
+1.0.0 - (23.03.2016)
 ==============
 - Initial

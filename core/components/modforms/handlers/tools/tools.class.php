@@ -60,7 +60,7 @@ interface ModFormsToolsInterface
 }
 
 /**
- * Class Tools 
+ * Class Tools
  */
 class Tools implements ModFormsToolsInterface
 {
@@ -173,6 +173,7 @@ class Tools implements ModFormsToolsInterface
             'ctx'           => "{$this->modx->context->get('key')}",
             'validation'    => (array)$opts['validation'],
             'inputmask'     => (array)$opts['inputmask'],
+            'realperson'    => (array)$opts['realperson'],
             'modal'         => (array)$opts['modal'],
         ));
         $this->modx->regClientScript(preg_replace($this->config['replacePattern'], '', '

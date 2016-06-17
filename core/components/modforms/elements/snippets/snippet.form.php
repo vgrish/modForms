@@ -19,7 +19,7 @@ if (!$ModForms) {
 $ModForms->initialize($modx->context->key, $scriptProperties);
 
 /* clear json $scriptProperties */
-foreach (array('validation', 'inputmask', 'modal') as $k) {
+foreach (array('validation', 'inputmask', 'realperson', 'modal') as $k) {
     $scriptProperties[$k] = $ModForms->Tools->fromJson($scriptProperties[$k]);
 }
 
@@ -30,6 +30,7 @@ $tplModal = $scriptProperties['tplModal'] = $modx->getOption('tplModal', $script
 $objectName = $scriptProperties['objectName'] = $modx->getOption('objectName', $scriptProperties, 'ModFormsForm', true);
 $validation = $scriptProperties['validation'] = $modx->getOption('validation', $scriptProperties, array(), true);
 $inputmask = $scriptProperties['inputmask'] = $modx->getOption('inputmask', $scriptProperties, array(), true);
+$realperson = $scriptProperties['realperson'] = $modx->getOption('realperson', $scriptProperties, array(), true);
 $modal = $scriptProperties['modal'] = $modx->getOption('modal', $scriptProperties, array(), true);
 
 $_selector = $scriptProperties['_selector'] = ltrim($selector, '#.');

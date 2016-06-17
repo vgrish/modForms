@@ -38,6 +38,12 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 MODX_ASSETS_PATH . 'components/modforms/vendor/'
             ),
             array(
+                'realperson',
+                'realperson',
+                'https://github.com/kbwood/realperson/archive/master.zip',
+                MODX_ASSETS_PATH . 'components/modforms/vendor/'
+            ),
+            array(
                 'uikit',
                 'uikit',
                 'https://github.com/uikit/uikit/archive/develop.zip',
