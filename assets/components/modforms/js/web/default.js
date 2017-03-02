@@ -63,7 +63,7 @@ var ModFormsForm = {
 		}
 
 		if (!jQuery().ajaxForm) {
-			document.writeln('<script src="' + config.assetsUrl + 'vendor/form/jquery.form.js"><\/script>');
+			document.writeln('<script src="' + config.assetsUrl + 'vendor/form/dist/jquery.form.min.js"><\/script>');
 		}
 
 		if (!jQuery().realperson) {
@@ -101,7 +101,9 @@ var ModFormsForm = {
 				var realpersonConfig = $.extend({}, config.realperson, $this.data());
 				if (realpersonConfig.field) {
 					var input = $this.find('input[name=' + realpersonConfig.field + ']');
+
 					if (input.length) {
+						input.val('');
 						input.realperson(realpersonConfig.config);
 					}
 				}

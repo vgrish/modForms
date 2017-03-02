@@ -46,7 +46,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             array(
                 'uikit',
                 'uikit',
-                'https://github.com/uikit/uikit/archive/develop.zip',
+                'https://github.com/uikit/uikit/archive/v2/master.zip',
                 MODX_ASSETS_PATH . 'components/modforms/vendor/'
             ),
 

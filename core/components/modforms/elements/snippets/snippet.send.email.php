@@ -62,7 +62,7 @@ foreach ($rows as $row) {
     if ($modChunk = $modx->getObject('modChunk', $body)) {
         $body = $ModForms->getChunk($modChunk->get('name'), $scriptProperties);
     }
-
+    
     $ModForms->sendEmail($email, $subject, $body);
 }
 

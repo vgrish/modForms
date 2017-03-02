@@ -1,5 +1,9 @@
 Changelog for ModForms.
 
+1.0.2 - (02.03.2017)
+==============
+- Change "vendors"
+
 1.0.1 - (17.06.2016)
 ==============
 - Fix "initialize"
